@@ -14,7 +14,7 @@ internal class AnimalRepositoryTest {
 
     @Test
     fun test() {
-        val animal = Animal(null, "cow")
+        val animal = Animal(name = "cow");
         animalRepository.save(animal);
 
         assertThat(animalRepository.findAll()).hasSize(1)

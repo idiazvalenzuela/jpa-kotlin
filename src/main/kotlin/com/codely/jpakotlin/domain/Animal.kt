@@ -1,15 +1,16 @@
 package com.codely.jpakotlin.domain
 
-import javax.annotation.processing.Generated
 import javax.persistence.Entity
+import javax.persistence.GeneratedValue
 import javax.persistence.Id
 import javax.persistence.Table
 
 @Entity
 @Table(name = "animal")
-data class Animal(
+open class Animal(
     @Id
-    @Generated
-    var id: Int?,
+    @GeneratedValue
+    var id: Int? = null,
+
     val name: String
 )
