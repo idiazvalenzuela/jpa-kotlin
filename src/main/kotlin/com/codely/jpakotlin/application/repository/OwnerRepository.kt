@@ -1,10 +1,10 @@
 package com.codely.jpakotlin.application.repository
 
 import com.codely.jpakotlin.domain.Owner
-import org.springframework.data.repository.CrudRepository
+import org.springframework.data.jpa.repository.JpaRepository
 import java.util.Date
 
-interface OwnerRepository : CrudRepository<Owner, Int> {
+interface OwnerRepository : JpaRepository<Owner, Int> {
 
     fun findOwnerByNameAndPreferredName(name: String?, preferredName: String?): Owner?
 

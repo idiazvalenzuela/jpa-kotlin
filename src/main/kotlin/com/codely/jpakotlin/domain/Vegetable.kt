@@ -13,17 +13,32 @@ import javax.persistence.Table
 @Table(name = "vegetable")
 @IdClass(VegetableId::class)
 open class Vegetable(
-    @Id
-    private var name: String? = null,
 
     @Id
-    private val family: String? = null,
+    open var name: String? = null,
+
+    @Id
+    open var family: String? = null,
 
     @Column(name = "vegetable_type")
     @Enumerated(value = EnumType.STRING)
-    private val type: VegetableType,
+    open var type: VegetableType,
 
     @Column(name = "average_weight")
-    private var averageWeight: Double? = null
+    open var averageWeight: Double? = null
 ) {
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Vegetable
+
+        if (name != other.name) return false
+        if (family != other.family) return false
+        if (type != other.type) return false
+        if (averageWeight != other.averageWeight) return false
+
+        return true
+    }
 }

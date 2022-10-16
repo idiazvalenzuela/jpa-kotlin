@@ -12,18 +12,18 @@ import javax.persistence.TemporalType
 @Entity
 open class Owner(
     @Id
-    private var id: Int? = null,
+    open var id: Int? = null,
 
     @Column(unique = true)
-    private val email: String? = null,
+    open val email: String? = null,
 
-    private val name: String,
+    open var name: String,
 
     @Column(name = "preferred_name")
-    private val preferredName: String? = null,
+    open var preferredName: String? = null,
 
     @Temporal(TemporalType.TIMESTAMP)
-    private val joinedAt: Date? = null
+    open var joinedAt: Date? = null
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -34,9 +34,5 @@ open class Owner(
         if (id != other.id) return false
 
         return true
-    }
-
-    override fun hashCode(): Int {
-        return id ?: 0
     }
 }

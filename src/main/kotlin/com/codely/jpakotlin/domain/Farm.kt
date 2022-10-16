@@ -13,12 +13,11 @@ import javax.persistence.Table
 open class Farm(
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private var id: Int? = null,
+    open var id: Int? = null,
 
-    private val name: String,
+    open var name: String,
 
     @OneToOne(cascade = [javax.persistence.CascadeType.ALL])
     @JoinColumn(name = "location_id", referencedColumnName = "id")
-    private val location: Location? = null
-) {
-}
+    open var location: Location? = null
+)

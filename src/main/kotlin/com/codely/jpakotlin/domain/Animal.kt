@@ -10,9 +10,9 @@ import javax.persistence.Table
 open class Animal(
     @Id
     @GeneratedValue
-    var id: Int? = null,
+    open var id: Int? = null,
 
-    val name: String
+    open var name: String
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

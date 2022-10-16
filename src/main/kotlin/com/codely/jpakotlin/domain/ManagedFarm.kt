@@ -1,5 +1,6 @@
 package com.codely.jpakotlin.domain
 
+import javax.persistence.CascadeType
 import javax.persistence.Entity
 import javax.persistence.FetchType
 import javax.persistence.Id
@@ -11,11 +12,12 @@ import javax.persistence.Table
 @Table(name = "managed_farm")
 open class ManagedFarm(
     @Id
-    private var id: Int? = null,
-    private val name: String? = null,
+    open var id: Int? = null,
 
-    @OneToMany(cascade = [javax.persistence.CascadeType.ALL], orphanRemoval = true, fetch = FetchType.EAGER)
+    open var name: String? = null,
+
+    @OneToMany(cascade = [CascadeType.ALL], orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "managed_farm_id")
-    private var foremen: MutableList<Foreman>? = null
+    open var foremen: MutableList<Foreman>? = mutableListOf()
 ) {
 }

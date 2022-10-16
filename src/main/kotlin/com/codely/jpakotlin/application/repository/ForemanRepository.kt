@@ -1,6 +1,6 @@
 package com.codely.jpakotlin.application.repository
 
 import com.codely.jpakotlin.domain.Foreman
-import org.springframework.data.repository.CrudRepository
+import org.springframework.data.jpa.repository.JpaRepository
 
-interface ForemanRepository : CrudRepository<Foreman, Int>
+interface ForemanRepository : JpaRepository<Foreman, Int>

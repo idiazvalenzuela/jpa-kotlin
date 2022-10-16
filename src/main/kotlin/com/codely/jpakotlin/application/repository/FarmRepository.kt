@@ -5,8 +5,9 @@ import com.codely.jpakotlin.domain.Location
 import org.springframework.data.jpa.repository.JpaRepository
 
 interface FarmRepository : JpaRepository<Farm, Int> {
+
     fun findFarmByLocation(location: Location): Farm
 
-    fun countFarmByLocationLatitude(latitude: Double): Int
+    fun countFarmsByLocationLatitude(latitude: Double): Int
 
 }

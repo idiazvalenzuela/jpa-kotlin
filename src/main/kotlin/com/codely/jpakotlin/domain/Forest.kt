@@ -1,5 +1,6 @@
 package com.codely.jpakotlin.domain
 
+import javax.persistence.CascadeType
 import javax.persistence.Entity
 import javax.persistence.FetchType
 import javax.persistence.Id
@@ -12,12 +13,12 @@ import javax.persistence.Table
 @Table
 open class Forest(
     @Id
-    private var id: Int? = null,
+    open var id: Int? = null,
 
-    private var name: String? = null,
+    open var name: String? = null,
 
     @ManyToMany(
-        cascade = [javax.persistence.CascadeType.PERSIST, javax.persistence.CascadeType.MERGE],
+        cascade = [CascadeType.PERSIST, CascadeType.MERGE],
         fetch = FetchType.EAGER
     )
     @JoinTable(
@@ -25,6 +26,5 @@ open class Forest(
         joinColumns = [JoinColumn(name = "forest_id")],
         inverseJoinColumns = [JoinColumn(name = "tree_name")]
     )
-    private val trees: Set<Tree>? = null
-) {
-}
+    open var trees: MutableSet<Tree> = mutableSetOf()
+)

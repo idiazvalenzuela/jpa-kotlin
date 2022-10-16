@@ -13,7 +13,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 
 @SpringBootTest
-internal class OwnerRepositoryTest {
+class OwnerRepositoryTest {
 
     @Autowired
     lateinit var ownerRepository: OwnerRepository
@@ -27,18 +27,31 @@ internal class OwnerRepositoryTest {
 
     @Test
     fun saveOneElementTest() {
-        val owner = Owner(id = 123, name = "Jane Marie", preferredName = "Jany")
+        val owner = Owner(
+            id = 123,
+            name = "Jane Marie",
+            preferredName = "Jany"
+        )
         val savedOwner = ownerRepository.save(owner)
 
         val ownerInDb = ownerRepository.findAll()
+
         assertThat(ownerInDb).hasSize(1)
         assertThat(ownerInDb).contains(savedOwner)
     }
 
     @Test
     fun saveUpsertTest() {
-        val owner = Owner(id = 123, name = "Jane Marie", preferredName = "Jany")
-        val anotherOwner = Owner(id = 123, name = "John", preferredName = "John")
+        val owner = Owner(
+            id = 123,
+            name = "Jane Marie",
+            preferredName = "Jany"
+        )
+        val anotherOwner = Owner(
+            id = 123,
+            name = "John",
+            preferredName = "John"
+        )
         ownerRepository.save(owner)
         ownerRepository.save(anotherOwner)
 
@@ -49,8 +62,16 @@ internal class OwnerRepositoryTest {
 
     @Test
     fun uniqueConstraint() {
-        val owner = Owner(id = 123, name = "Jane Marie", email = "mail@mail.com")
-        val anotherOwner = Owner(id = 456, name = "John Smith", email = "mail@mail.com")
+        val owner = Owner(
+            id = 123,
+            name = "Jane Marie",
+            email = "mail@mail.com"
+        )
+        val anotherOwner = Owner(
+            id = 456,
+            name = "John Smith",
+            email = "mail@mail.com"
+        )
         ownerRepository.save(owner)
         val ownerInDb = ownerRepository.findAll()
         assertThat(ownerInDb).hasSize(1)
@@ -70,8 +91,18 @@ internal class OwnerRepositoryTest {
 
     @Test
     fun findByMultipleCriteria() {
-        val owner = Owner(id = 123, name = "Jane Marie", email = "mail@mail.com")
-        val anotherOwner = Owner(id = 456, name = "John Smith", email = "mail@mail.com")
+        val owner = Owner(
+            id = 123,
+            name = "Jane Marie",
+            email = "mail@mail.com",
+            preferredName = "Jany"
+        )
+        val anotherOwner = Owner(
+            id = 456,
+            name = "Jane Marie",
+            email = "anotherEmail@mail.com",
+            preferredName = "Mary"
+        )
 
         ownerRepository.saveAll(listOf(owner, anotherOwner))
 
@@ -81,8 +112,17 @@ internal class OwnerRepositoryTest {
 
     @Test
     fun findByMultipleCriteriaWithNull() {
-        val owner = Owner(id = 123, name = "Jane Marie", email = "mail@mail.com")
-        val anotherOwner = Owner(id = 456, name = "Jane Marie", email = "anotherEmail@mail.com")
+        val owner = Owner(
+            id = 123,
+            name = "Jane Marie",
+            email = "mail@mail.com",
+            preferredName = "Jany"
+        )
+        val anotherOwner = Owner(
+            id = 456,
+            name = "Jane Marie",
+            email = "anotherEmail@mail.com"
+        )
 
         ownerRepository.saveAll(listOf(owner, anotherOwner))
 
@@ -93,10 +133,24 @@ internal class OwnerRepositoryTest {
     @Test
     fun findByMultipleCriteriaOr() {
 
-        val owner = Owner(id = 123, name = "Jane Marie", email = "mail@mail.com", preferredName = "Jany")
-        val anotherOwner = Owner(id = 456, name = "Jane Marie", email = "anotherEmail@mail.com", preferredName = "Mary")
-        val yetAnotherOwner =
-            Owner(id = 789, name = "Janice Jane", email = "yetAnotherEmail@mail.com", preferredName = "Jany")
+        val owner = Owner(
+            id = 123,
+            name = "Jane Marie",
+            email = "mail@mail.com",
+            preferredName = "Jany"
+        )
+        val anotherOwner = Owner(
+            id = 456,
+            name = "Jane Marie",
+            email = "anotherEmail@mail.com",
+            preferredName = "Mary"
+        )
+        val yetAnotherOwner = Owner(
+            id = 789,
+            name = "Janice Jane",
+            email = "yetAnotherEmail@mail.com",
+            preferredName = "Jany"
+        )
 
         ownerRepository.saveAll(listOf(owner, anotherOwner, yetAnotherOwner))
 
@@ -107,8 +161,12 @@ internal class OwnerRepositoryTest {
 
     @Test
     fun findByDate() {
-        val owner =
-            Owner(id = 123, name = "Jane Marie", email = "mail@mail.com", joinedAt = parseDate("2018-05-05 11:50:55"))
+        val owner = Owner(
+            id = 123,
+            name = "Jane Marie",
+            email = "mail@mail.com",
+            joinedAt = parseDate("2018-05-05 11:50:55")
+        )
         val anotherOwner = Owner(
             id = 456,
             name = "Jane Marie",
@@ -124,14 +182,18 @@ internal class OwnerRepositoryTest {
 
         ownerRepository.saveAll(listOf(owner, anotherOwner, yetAnotherOwner))
 
-        val found: Owner? = ownerRepository.findOwnerByJoinedAt(parseDate("2020-07-09 14:00:00"))
+        val found = ownerRepository.findOwnerByJoinedAt(parseDate("2020-07-09 14:00:00"))
         assertThat(found).isEqualTo(anotherOwner)
     }
 
     @Test
     fun findByDateAfter() {
-        val owner =
-            Owner(id = 123, name = "Jane Marie", email = "mail@mail.com", joinedAt = parseDate("2018-05-05 11:50:55"))
+        val owner = Owner(
+            id = 123,
+            name = "Jane Marie",
+            email = "mail@mail.com",
+            joinedAt = parseDate("2018-05-05 11:50:55")
+        )
         val anotherOwner = Owner(
             id = 456,
             name = "Jane Marie",
@@ -154,8 +216,12 @@ internal class OwnerRepositoryTest {
 
     @Test
     fun findByDateBefore() {
-        val owner =
-            Owner(id = 123, name = "Jane Marie", email = "mail@mail.com", joinedAt = parseDate("2018-05-05 11:50:55"))
+        val owner = Owner(
+            id = 123,
+            name = "Jane Marie",
+            email = "mail@mail.com",
+            joinedAt = parseDate("2018-05-05 11:50:55")
+        )
         val anotherOwner = Owner(
             id = 456,
             name = "Jane Marie",
@@ -177,8 +243,12 @@ internal class OwnerRepositoryTest {
 
     @Test
     fun findByDateBetween() {
-        val owner =
-            Owner(id = 123, name = "Jane Marie", email = "mail@mail.com", joinedAt = parseDate("2018-05-05 11:50:55"))
+        val owner = Owner(
+            id = 123,
+            name = "Jane Marie",
+            email = "mail@mail.com",
+            joinedAt = parseDate("2018-05-05 11:50:55")
+        )
         val anotherOwner = Owner(
             id = 456,
             name = "Jane Marie",
@@ -197,7 +267,7 @@ internal class OwnerRepositoryTest {
             parseDate("2015-01-01 00:00:00"),
             parseDate("2020-01-01 00:00:00")
         )
-//        assertThat(found.getId()).isEqualTo(123)
+        assertThat(found!!.id).isEqualTo(123)
     }
 
     @Throws(ParseException::class)
