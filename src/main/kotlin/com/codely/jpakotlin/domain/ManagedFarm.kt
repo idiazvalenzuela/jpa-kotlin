@@ -19,5 +19,4 @@ open class ManagedFarm(
     @OneToMany(cascade = [CascadeType.ALL], orphanRemoval = true, fetch = FetchType.EAGER)
     @JoinColumn(name = "managed_farm_id")
     open var foremen: MutableList<Foreman>? = mutableListOf()
-) {
-}
+)
