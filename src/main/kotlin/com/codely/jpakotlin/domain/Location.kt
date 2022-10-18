@@ -9,15 +9,15 @@ import javax.persistence.Table
 
 @Table
 @Entity
-open class Location(
+class Location(
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    open var id: Int? = null,
+    var id: Int? = null,
 
-    open var latitude: Double,
+    var latitude: Double,
 
-    open var longitude: Double,
+    var longitude: Double,
 
     @OneToOne(mappedBy = "location")
-    open var farm: Farm? = null
+    var farm: Farm? = null
 )

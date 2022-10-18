@@ -9,15 +9,15 @@ import javax.persistence.Table
 
 @Entity
 @Table
-open class Foreman(
+class Foreman(
     @Id
-    open var id: Int? = null,
+    var id: Int? = null,
 
-    open var name: String? = null,
+    var name: String? = null,
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "managed_farm_id", referencedColumnName = "id")
-    open var managedFarm: ManagedFarm? = null
+    var managedFarm: ManagedFarm? = null
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

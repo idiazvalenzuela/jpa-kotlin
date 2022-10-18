@@ -10,13 +10,16 @@ import javax.persistence.Table
 
 @Entity
 @Table(name = "managed_farm")
-open class ManagedFarm(
+class ManagedFarm(
     @Id
-    open var id: Int? = null,
+    var id: Int? = null,
 
-    open var name: String? = null,
+    var name: String? = null,
 
-    @OneToMany(cascade = [CascadeType.ALL], orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(
+        cascade = [CascadeType.ALL],
+        orphanRemoval = true, fetch = FetchType.EAGER
+    )
     @JoinColumn(name = "managed_farm_id")
-    open var foremen: MutableList<Foreman>? = mutableListOf()
+    var foremen: MutableList<Foreman>? = mutableListOf()
 )

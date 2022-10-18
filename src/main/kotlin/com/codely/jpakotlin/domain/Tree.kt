@@ -8,10 +8,10 @@ import javax.persistence.Table
 
 @Entity
 @Table
-open class Tree(
+class Tree(
     @Id
-    open var name: String? = null,
+    var name: String? = null,
 
     @ManyToMany(mappedBy = "trees", fetch = FetchType.EAGER)
-    open var forests: MutableSet<Forest> = mutableSetOf()
+    var forests: MutableSet<Forest> = mutableSetOf()
 )

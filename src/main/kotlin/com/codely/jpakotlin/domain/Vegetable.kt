@@ -12,20 +12,20 @@ import javax.persistence.Table
 @Entity
 @Table(name = "vegetable")
 @IdClass(VegetableId::class)
-open class Vegetable(
+class Vegetable(
 
     @Id
-    open var name: String? = null,
+    var name: String? = null,
 
     @Id
-    open var family: String? = null,
+    var family: String? = null,
 
     @Column(name = "vegetable_type")
     @Enumerated(value = EnumType.STRING)
-    open var type: VegetableType,
+    var type: VegetableType,
 
     @Column(name = "average_weight")
-    open var averageWeight: Double? = null
+    var averageWeight: Double? = null
 ) {
 
     override fun equals(other: Any?): Boolean {

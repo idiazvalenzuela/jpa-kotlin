@@ -10,20 +10,20 @@ import javax.persistence.TemporalType
 
 @Table(name = "owner")
 @Entity
-open class Owner(
+class Owner(
     @Id
-    open var id: Int? = null,
+    var id: Int? = null,
 
     @Column(unique = true)
-    open val email: String? = null,
+    val email: String? = null,
 
-    open var name: String,
+    var name: String,
 
     @Column(name = "preferred_name")
-    open var preferredName: String? = null,
+    var preferredName: String? = null,
 
     @Temporal(TemporalType.TIMESTAMP)
-    open var joinedAt: Date? = null
+    var joinedAt: Date? = null
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

@@ -10,14 +10,14 @@ import javax.persistence.Table
 
 @Entity
 @Table(name = "farm")
-open class Farm(
+class Farm(
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    open var id: Int? = null,
+    var id: Int? = null,
 
-    open var name: String,
+    var name: String,
 
     @OneToOne(cascade = [javax.persistence.CascadeType.ALL])
     @JoinColumn(name = "location_id", referencedColumnName = "id")
-    open var location: Location? = null
+    var location: Location? = null
 )

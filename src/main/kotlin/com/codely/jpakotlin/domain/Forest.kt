@@ -11,11 +11,11 @@ import javax.persistence.Table
 
 @Entity
 @Table
-open class Forest(
+class Forest(
     @Id
-    open var id: Int? = null,
+    var id: Int? = null,
 
-    open var name: String? = null,
+    var name: String? = null,
 
     @ManyToMany(
         cascade = [CascadeType.PERSIST, CascadeType.MERGE],
@@ -26,5 +26,5 @@ open class Forest(
         joinColumns = [JoinColumn(name = "forest_id")],
         inverseJoinColumns = [JoinColumn(name = "tree_name")]
     )
-    open var trees: MutableSet<Tree> = mutableSetOf()
+    var trees: MutableSet<Tree> = mutableSetOf()
 )
